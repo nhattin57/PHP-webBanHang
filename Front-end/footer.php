@@ -41,8 +41,15 @@
         </div>
     </footer>
     <!--end - footer-->
-</body>
-<script>
+    <script>
+    const itemsliderbar = document.querySelectorAll(".category-left-li")
+    itemsliderbar.forEach(function(menu,index){
+        menu.addEventListener("click",function(){
+            menu.classList.toggle("block")
+        })
+    })
+    </script>
+    <script>
     const header = document.querySelector("header")
     window.addEventListener("scroll",function(){
         x = window.pageYOffset
@@ -80,4 +87,15 @@
     setInterval(imgSlide,5000)
 
 </script>
+<script>
+    const bigImg = document.querySelector(".product-content-left-big-img img")
+    const smallImg = document.querySelectorAll(".product-content-left-small-img img")
+    smallImg.forEach(function(imgItem, X){
+        imgItem.addEventListener("click",function(){
+           bigImg.src = imgItem.src 
+        })
+    })
+</script>
+</body>
+
 </html>
