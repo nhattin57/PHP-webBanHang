@@ -30,7 +30,8 @@ try{
         }
     } else {
         // The statement doesn't have data
-        echo "Sai tài khoản hoặc mật khẩu";
+        $error_message = "Sai tài khoản hoặc mật khẩu";
+        header("Location: ../Front-end/login.php?error_message=" . urlencode($error_message));
     }
     
     }catch(PDOException $e){
