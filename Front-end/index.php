@@ -2,7 +2,7 @@
     <!----end-menu----------->
 
     <?php 
-        include 'header.php';
+        require 'header.php';
     ?>
     <!-----Slider---------->
     <section id="slider">
