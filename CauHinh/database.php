@@ -9,9 +9,10 @@
             "mysql:host=".DATABASE_SERVER.";dbname=".DATABASE_NAME, 
             DATABASE_USER, DATABASE_PASSWORD);
         $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        echo "Connected successfully";    
+        echo "<script>console.log('ket noi database thanh cong') </script>";   
+            
     } catch(PDOException $e) {
-        echo "Connection failed: " . $e->getMessage();
+        echo "<script>console.log('ket noi database that bai') </script>";
         $connection = null;
     }
             

@@ -1,5 +1,5 @@
 <?php
-    include './CauHinh/database.php'; 
+    include '../CauHinh/database.php'; 
 ?> 
 
 <!DOCTYPE html>
