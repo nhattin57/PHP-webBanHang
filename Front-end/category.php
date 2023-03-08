@@ -1,5 +1,6 @@
 <?php 
-include 'header.php';
+require 'header.php';
+
 ?>
     <!----end-menu----------->
 
@@ -360,11 +361,3 @@ include 'header.php';
         include 'footer.php';
     ?>
 
-<script>
-    const itemsliderbar = document.querySelectorAll(".category-left-li")
-    itemsliderbar.forEach(function(menu,index){
-        menu.addEventListener("click",function(){
-            menu.classList.toggle("block")
-        })
-    })
-</script>
