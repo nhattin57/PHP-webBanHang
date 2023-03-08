@@ -1,7 +1,11 @@
 <?php 
         require 'header.php';
+        $error = '';
         // Lấy dữ liệu từ form đăng nhập
-
+        if (isset($_GET['error_message'])) {
+            $error = $_GET['error_message'];
+            // Display the error message
+        }
 ?>
     <!----end-menu----------->
 
@@ -17,8 +21,9 @@
                 <i class="fa fa-key"></i>
                 <input type="password" class="form-input" name="password" placeholder="Mật khẩu">
             </div>
+            <h2 style="color: red; font-size: 15px; text-align: center;"><?php echo $error;  ?></h2>
             <input type="submit" value="Đăng nhập" class="form-submit">
-            <p>Bạn chưa có tài khoản? Đăng ký <a style="color:red; text-decoration-line: underline" href="http://127.0.0.1:5500/signup.html"> tại đây.</a></span>
+            <p>Bạn chưa có tài khoản? Đăng ký <a style="color:red; text-decoration-line: underline" href="./signup.php"> tại đây.</a></span>
         </form>
     </div>
 
