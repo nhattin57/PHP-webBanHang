@@ -42,7 +42,7 @@
                 }
                 
              ?> -->
-            <li><a class="fa fa-user" href="">Thoát</a></li>
+            <li><a class="fa fa-user" href=""></a></li>
             <li><a class="fa fa-shopping-bag" href=""></a></li>
         </div>
     </header>

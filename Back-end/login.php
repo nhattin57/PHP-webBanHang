@@ -14,13 +14,13 @@ try{
     $statement = $connection ->prepare($sql);
     $statement->execute();
     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-    $feedbacks = $statement->fetchAll();
+    $thanhviens = $statement->fetchAll();
     if ($statement->rowCount() > 0) {
         // The statement has data
-        foreach($feedbacks as $feedback) {
-            $HoTen = $feedback['HoTen'] ??'';
-            $MaLoaiTV = $feedback['MaLoaiTV'] ??'';
-            $MaThanhVien = $feedback['MaThanhVien'] ??'';
+        foreach($thanhviens as $thanhvien) {
+            $HoTen = $thanhvien['HoTen'] ??'';
+            $MaLoaiTV = $thanhvien['MaLoaiTV'] ??'';
+            $MaThanhVien = $thanhvien['MaThanhVien'] ??'';
                 $_SESSION['user'] = array(
                     'username' => $HoTen,
                     'loggedin' => true,
