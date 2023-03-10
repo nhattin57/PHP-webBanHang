@@ -74,7 +74,6 @@
     })
     function imgSlide (){
         index++;
-        console.log(index)
         if(index>=imgNuber) {index=0}
         slider (index)
     }
@@ -96,6 +95,7 @@
         })
     })
 </script>
+
 </body>
 
 </html>
