@@ -16,7 +16,7 @@ try{
     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
     $thanhviens = $statement->fetchAll();
     if ($statement->rowCount() > 0) {
-        // The statement has data
+        // The statement has data djd
         foreach($thanhviens as $thanhvien) {
             $HoTen = $thanhvien['HoTen'] ??'';
             $MaLoaiTV = $thanhvien['MaLoaiTV'] ??'';

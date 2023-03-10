@@ -9,7 +9,7 @@
                     $statement->execute();
                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                     $loaisanphams = $statement->fetchAll();
-                    //echo $feedbacks[1]['MaLoaiSP'];
+                    //echo $feedbacks[1]['MaLoaiSP'] nay loi r;
                     
                     if ($statement->rowCount() > 0) {
                         // The statement has data

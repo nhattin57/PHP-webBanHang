@@ -28,7 +28,7 @@
             <!-- <?php 
 
                 session_start();
-                // Check if the session is already active
+                // Check if the session is already active ?
                 if (isset($_SESSION['user'])) {
                     //print_r($_SESSION["user"]);
                     // Session is active

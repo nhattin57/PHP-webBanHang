@@ -9,7 +9,7 @@
                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                     $loaisanphams = $statement->fetchAll();
                     if ($statement->rowCount() > 0) {
-                        // The statement has data
+                        // The statement has data ??
                         foreach($loaisanphams as $loaisanpham) {
                             $MaLoaiSP = $loaisanpham['MaLoaiSP'] ??'';
                             $TenLoaiSP = $loaisanpham['TenLoai'] ??'';
