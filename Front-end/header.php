@@ -25,7 +25,24 @@
 
         <div class="others">
             <li><input placeholder="Tìm kiếm" type="text"> <i class="fa fa-search"></i></li>
-            <li><a class="fa fa-user" href=""></a></li>
+            <!-- <?php 
+
+                session_start();
+                // Check if the session is already active
+                if (isset($_SESSION['user'])) {
+                    //print_r($_SESSION["user"]);
+                    // Session is active
+                    echo '<h5>'.$_SESSION['user']['username'].'</h5>';
+                    echo '<li><a class="fa fa-user" href="">Thoát</a></li>';
+                    echo '<li><a class="fa fa-shopping-bag" href=""></a></li>';
+                } else {
+                    // Session is not active
+                    echo '<li><a class="fa fa-user" href="./login.php"></a></li>';
+                    echo '<li><a class="fa fa-shopping-bag" href=""></a></li>';
+                }
+                
+             ?> -->
+            <li><a class="fa fa-user" href="">Thoát</a></li>
             <li><a class="fa fa-shopping-bag" href=""></a></li>
         </div>
     </header>

@@ -20,10 +20,12 @@ try{
         foreach($feedbacks as $feedback) {
             $HoTen = $feedback['HoTen'] ??'';
             $MaLoaiTV = $feedback['MaLoaiTV'] ??'';
+            $MaThanhVien = $feedback['MaThanhVien'] ??'';
                 $_SESSION['user'] = array(
                     'username' => $HoTen,
                     'loggedin' => true,
-                    'MaLoaiTV' => $MaLoaiTV
+                    'MaLoaiTV' => $MaLoaiTV,
+                    'MaThanhVien' => $MaThanhVien
                   );
                   header('Location: ../Front-end/index.php');
            
