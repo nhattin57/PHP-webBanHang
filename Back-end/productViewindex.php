@@ -51,6 +51,7 @@
                                                 }
                                                 echo '</div>';
                                             echo '</div>';
+                                            echo '<a href="" class="view-all">XEM TẤT CẢ SẢN PHẨM</a>';
                                         echo '</div>';
                                     echo '</section>';
                                             } else {
