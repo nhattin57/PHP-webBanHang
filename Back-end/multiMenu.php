@@ -8,14 +8,14 @@
                     $statement = $connection ->prepare($sql);
                     $statement->execute();
                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                    $feedbacks = $statement->fetchAll();
-                    //echo $feedbacks[1]['MaLoaiSP'];
+                    $loaisanphams = $statement->fetchAll();
+                    //echo $feedbacks[1]['MaLoaiSP'] nay loi r;
                     
                     if ($statement->rowCount() > 0) {
                         // The statement has data
-                        foreach($feedbacks as $feedback) {
-                            $maLoaiSP = $feedback['MaLoaiSP'] ??'';
-                            $tenLoaiSP = $feedback['TenLoai'] ??'';
+                        foreach($loaisanphams as $loaisanpham) {
+                            $maLoaiSP = $loaisanpham['MaLoaiSP'] ??'';
+                            $tenLoaiSP = $loaisanpham['TenLoai'] ??'';
                             echo '<li><a href="">'.$tenLoaiSP.'</a>
                             ';
                             
@@ -25,13 +25,13 @@
                                 $statement = $connection ->prepare($sql);
                                 $statement->execute();
                                 $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                                $feedbacks1 = $statement->fetchAll();
+                                $nhasanxuats = $statement->fetchAll();
                                 //print_r($feedbacks1);
                                 if ($statement->rowCount() > 0) {
-                                    foreach($feedbacks1 as $feedback2) {
+                                    foreach($nhasanxuats as $nhasanxuat) {
                                         //print_r($feedback2);
-                                        $maNSX = $feedback2['MaNSX'];
-                                        $tenNSX= $feedback2['TenNSX'];
+                                        $maNSX = $nhasanxuat['MaNSX'];
+                                        $tenNSX= $nhasanxuat['TenNSX'];
                                         echo '<li><i class="fa fa-laptop"></i><a href="">'.$tenNSX.'</a></li>';
                                     }
                                     echo '</ul>';

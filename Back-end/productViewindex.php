@@ -7,12 +7,12 @@
                     $statement = $connection ->prepare($sql);
                     $statement->execute();
                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                    $feedbacks = $statement->fetchAll();
+                    $loaisanphams = $statement->fetchAll();
                     if ($statement->rowCount() > 0) {
-                        // The statement has data
-                        foreach($feedbacks as $feedback) {
-                            $MaLoaiSP = $feedback['MaLoaiSP'] ??'';
-                            $TenLoaiSP = $feedback['TenLoai'] ??'';
+                        // The statement has data ??
+                        foreach($loaisanphams as $loaisanpham) {
+                            $MaLoaiSP = $loaisanpham['MaLoaiSP'] ??'';
+                            $TenLoaiSP = $loaisanpham['TenLoai'] ??'';
 
                             $sql = 'SELECT MaSP, TenSP, DonGia, CauHinh,HinhAnh FROM `sanpham` WHERE MaLoaiSP = '.$MaLoaiSP.' 
                             ORDER BY NgayCapNhap DESC LIMIT 8';
@@ -29,15 +29,15 @@
                                             $statement = $connection ->prepare($sql);
                                             $statement->execute();
                                             $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                                            $feedbacks = $statement->fetchAll();
+                                            $sanphams = $statement->fetchAll();
                                             if ($statement->rowCount() > 0) {
                                                 // The statement has data
-                                                foreach($feedbacks as $feedback) {
-                                                    $MaSP = $feedback['MaSP'] ??'';
-                                                    $TenSP = $feedback['TenSP'] ??'';
-                                                    $DonGia = $feedback['DonGia'] ??'';
-                                                    $CauHinh = $feedback['CauHinh'] ??'';
-                                                    $HinhAnh = $feedback['HinhAnh'] ??'';
+                                                foreach($sanphams as $sanpham) {
+                                                    $MaSP = $sanpham['MaSP'] ??'';
+                                                    $TenSP = $sanpham['TenSP'] ??'';
+                                                    $DonGia = $sanpham['DonGia'] ??'';
+                                                    $CauHinh = $sanpham['CauHinh'] ??'';
+                                                    $HinhAnh = $sanpham['HinhAnh'] ??'';
                                                    echo '<div class="p-item">'; //1div
                                                         echo '<img src="../HinhAnh/'.$HinhAnh.'" alt="">';
                                                         echo '<h1 class="p-sku" style="font-size: 12px;"> Mã SP : '.$MaSP.' </h1>';

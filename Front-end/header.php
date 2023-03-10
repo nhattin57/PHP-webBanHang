@@ -28,7 +28,7 @@
             <!-- <?php 
 
                 session_start();
-                // Check if the session is already active
+                // Check if the session is already active ?
                 if (isset($_SESSION['user'])) {
                     //print_r($_SESSION["user"]);
                     // Session is active
@@ -42,7 +42,7 @@
                 }
                 
              ?> -->
-            <li><a class="fa fa-user" href="">Thoát</a></li>
+            <li><a class="fa fa-user" href=""></a></li>
             <li><a class="fa fa-shopping-bag" href=""></a></li>
         </div>
     </header>
