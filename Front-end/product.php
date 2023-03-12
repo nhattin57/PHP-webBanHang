@@ -16,7 +16,7 @@ require 'header.php';
         $LoaiSanPham;
 
 
-        $sql = 'SELECT TenSP, DonGia, CauHinh, MaLoaiSP,HinhAnh FROM `sanpham` WHERE MaSP =' . $MaSP;
+        $sql = 'select TenSP, DonGia, CauHinh, MaLoaiSP,HinhAnh FROM `sanpham` WHERE MaSP =' . $MaSP;
 
         if ($connection != null) {
             try {
