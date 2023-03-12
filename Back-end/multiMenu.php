@@ -32,7 +32,7 @@
                                         //print_r($feedback2);
                                         $maNSX = $nhasanxuat['MaNSX'];
                                         $tenNSX= $nhasanxuat['TenNSX'];
-                                        echo '<li><i class="fa fa-laptop"></i><a href="">'.$tenNSX.'</a></li>';
+                                        echo '<li><i class="fa fa-laptop"></i><a href="../Front-end/viewproductOnMenu.php?MaLoaiSP='.$maLoaiSP.'&MaNSX='.$maNSX.'">'.$tenNSX.'</a></li>';
                                     }
                                     echo '</ul>';
                                 }
