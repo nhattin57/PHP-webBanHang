@@ -5,7 +5,7 @@
     session_start();
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+    $password = password_hash($password, PASSWORD_DEFAULT);
 // Function to validate user login
 $sql = "SELECT * FROM thanhvien WHERE TaiKhoan='$username' AND MatKhau='$password'";
 
