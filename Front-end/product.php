@@ -114,7 +114,7 @@ require 'header.php';
                                             <b class="d-block">ĐẶT MUA NGAY</b>
                                             <span class="d-block">Nhanh chóng, thuận tiện</span>
                                         </button>
-                                        <button><a href = "./cart.php?MaSP='.$MaSP.'">
+                                        <button><a href = "./cart.php?MaSP='.$MaSP.'&TenSP='.$TenSP.'&DonGia='.$DonGia.'">
                                             <b class="d-block">CHO VÀO GIỎ</b>
                                             <span class="d-block">Mua tiếp sản phẩm khác</span>
                                             </a>

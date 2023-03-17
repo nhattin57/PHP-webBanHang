@@ -3,21 +3,23 @@ require '../CauHinh/database.php';
 
 session_start();
 
-$TaiKhoan = $_POST['TaiKhoan'];
-$password = $_POST['MatKhau'];
-$password2 = $_POST['NhaplaiMatKhau'];
+$username = $_POST['username'];
+$password = $_POST['password'];
+$repassword = $_POST['repassword'];
+$fullname = $_POST['fullname'];
+$Email = $_POST['Email'];
 
-$error;
+$error ='';
 // Function to validate user login
-//$hashed_password = password_hash($password, PASSWORD_DEFAULT); // Hash the password using bcrypt
-if ($password  != $password2) {
-    $error = 'Mat khau khong trung nhau';
+$password = md5($password); // Hash the password using bcrypt
+if ($password  != $repassword) {
+    $error = 'Mật khẩu không trùng nhau';
     header('Location: ../Front-End/signup.php?error=' . urldecode($error));
-    exit;
 }
-$password = password_hash($password, PASSWORD_DEFAULT); // Hash the password using bcrypt
 
-$sql = "select *from thanhvien where TaiKhoan = '$TaiKhoan'";
+//$password = password_hash($password, PASSWORD_DEFAULT); // Hash the password using bcrypt
+
+$sql = "select *from thanhvien where TaiKhoan = '$username'";
 if ($connection != null) {
     try {
         $statement = $connection->prepare($sql);
@@ -26,14 +28,13 @@ if ($connection != null) {
             $error = "Tai khoan da ton tai";
             header('Location: ../Front-End/signup.php?error=' . urldecode($error));
         } else {
-            $sql = "insert into thanhvien (TaiKhoan, MatKhau) values ('$TaiKhoan', '$password')";
+            $sql = "insert into thanhvien (TaiKhoan, MatKhau, HoTen, Email, MaLoaiTV) values ('$username', '$password', '$fullname', '$Email',1)";
 
             if ($connection != null) {
                 try {
                     $statement = $connection->prepare($sql);
                     $statement->execute();
                     if ($statement->rowCount() > 0)
-
                         header('Location: ../Front-End/login.php');
                 } catch (PDOException $e) {
                     echo "Cannot query database";
