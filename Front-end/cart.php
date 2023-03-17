@@ -3,6 +3,8 @@
 session_start();
 
     $MaSP = $_GET['MaSP'];
+    $TenSP = $_GET['TenSP'];
+    $DonGia = $_GET['DonGia'];
     //$SoLuong = 1;
     //header('Location: ../Front-End/index.php');
     if (!isset($_SESSION['cart'])) {
@@ -15,8 +17,8 @@ session_start();
         $_SESSION['cart'][$MaSP]['SoLuong'] +=1;
       } else {
         // Thêm sản phẩm mới vào giỏ hàng với số lượng mặc định là 1
-        $_SESSION['cart'][$MaSP] = array('MaSP' => $MaSP, 'SoLuong' => 1);
+        $_SESSION['cart'][$MaSP] = array('MaSP' => $MaSP, 'SoLuong' => 1, 'TenSP' =>$TenSP, 'DonGia' => $DonGia);
       }
-      print_r($_SESSION['cart']);
-    //header('Location: ./product.php?MaSP='.$MaSP);
+      //print_r($_SESSION['cart']);
+    header('Location: ./product.php?MaSP='.$MaSP);
 ?>

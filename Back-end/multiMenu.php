@@ -16,7 +16,7 @@
                         foreach($loaisanphams as $loaisanpham) {
                             $maLoaiSP = $loaisanpham['MaLoaiSP'] ??'';
                             $tenLoaiSP = $loaisanpham['TenLoai'] ??'';
-                            echo '<li><a href="">'.$tenLoaiSP.'</a>
+                            echo '<li><a href="../Front-end/viewallproduct.php?MaLoaiSP='.$maLoaiSP.'">'.$tenLoaiSP.'</a>
                             ';
                             
                             $sql = 'SELECT b.MaNSX, b.TenNSX FROM `sanpham` a, `nhasanxuat` b WHERE MaLoaiSP ='.$maLoaiSP.' and a.MaNSX = b.MaNSX GROUP BY MaNSX';
