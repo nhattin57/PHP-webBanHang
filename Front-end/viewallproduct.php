@@ -3,6 +3,22 @@ require 'header.php';
         $MaLoaiSP;
         if(isset($_GET['MaLoaiSP']))
             $MaLoaiSP = $_GET['MaLoaiSP'];
+            $recordsPerPage = 8;
+            $page = isset($_GET['page']) ? $_GET['page'] : 1;
+            $offset = ($page - 1) * $recordsPerPage;
+            $sql = "Select * from `sanpham` where DaXoa =1 AND MaLoaiSP = $MaLoaiSP";
+            $totalRecords;
+            if($connection != null){
+                try{
+                    $statement = $connection ->prepare($sql);
+                    $statement->execute();
+                    $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                    $sanphams = $statement->fetchAll();
+                    $totalRecords = count($sanphams); // assuming $sanphams is an array of all products for the given category
+                    }catch(PDOException $e){
+                        echo "Cannot query database";
+                    }  
+                }
 ?>
 <!----end-menu----------->
 
@@ -13,8 +29,7 @@ require 'header.php';
    
                   $TenLoaiSP;
 
-                    $sql = 'SELECT MaSP, TenSP, DonGia, CauHinh,HinhAnh FROM `sanpham` WHERE MaLoaiSP = '.$MaLoaiSP.' 
-                    ORDER BY NgayCapNhap DESC';
+                    $sql = $sql = "SELECT MaSP, TenSP, DonGia, CauHinh, HinhAnh FROM `sanpham` WHERE MaLoaiSP = $MaLoaiSP AND DaXoa=1 ORDER BY NgayCapNhap DESC LIMIT $recordsPerPage OFFSET $offset";
                     switch ($MaLoaiSP) {
                         case 1:
                             $TenLoaiSP = 'Điện Thoại';
@@ -44,6 +59,8 @@ require 'header.php';
                                     $statement->execute();
                                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                                     $sanphams = $statement->fetchAll();
+                                    $totalPages = ceil($totalRecords / $recordsPerPage);
+                                    
                                     if ($statement->rowCount() > 0) {
                                         // The statement has data
                                         foreach($sanphams as $sanpham) {
@@ -65,7 +82,16 @@ require 'header.php';
                                         }
                                         echo '</div>';
                                     echo '</div>';
-                                   
+                                   //paging here
+                                   echo '<div class="pagination">';
+                                    for ($i = 1; $i <= $totalPages; $i++) {
+                                        if ($i == $page) {
+                                            echo "<span class='current'>$i</span>";
+                                        } else {
+                                            echo "<a href='viewallProduct.php?MaLoaiSP=$MaLoaiSP&page=$i'>$i</a>";
+                                        }
+                                    }
+                                    echo '</div>';
                                 echo '</div>';
                             echo '</section>';
                         

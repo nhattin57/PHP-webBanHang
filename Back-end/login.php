@@ -5,7 +5,7 @@
     session_start();
     $username = $_POST['username'];
     $password = $_POST['password'];
-
+    $password = md5($password);
 // Function to validate user login
 $sql = "SELECT * FROM thanhvien WHERE TaiKhoan='$username' AND MatKhau='$password'";
 
@@ -21,11 +21,14 @@ try{
             $HoTen = $thanhvien['HoTen'] ??'';
             $MaLoaiTV = $thanhvien['MaLoaiTV'] ??'';
             $MaThanhVien = $thanhvien['MaThanhVien'] ??'';
+            $Email = $thanhvien['Email'] ??'';
+            
                 $_SESSION['user'] = array(
                     'username' => $HoTen,
                     'loggedin' => true,
                     'MaLoaiTV' => $MaLoaiTV,
-                    'MaThanhVien' => $MaThanhVien
+                    'MaThanhVien' => $MaThanhVien,
+                    'Email' => $Email
                   );
                   header('Location: ../Front-end/index.php');
            
