@@ -30,6 +30,8 @@
     </section>
     <!-- VIEW PRODUCT -->
     <?php
+        if(isset($_GET['message']))
+            echo $_GET['message'];
 
             include '../Back-end/productViewindex.php'
     ?>
