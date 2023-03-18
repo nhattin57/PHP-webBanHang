@@ -10,35 +10,40 @@
         header("location: ../Front-end/login.php");
     } else{
 
-        $MaTV = $_SESSION['user']['MaThanhVien'];
+        $MaTV = intval($_SESSION['user']['MaThanhVien']);
         $HoTen = $_SESSION['user']['username'];
         $Email = $_SESSION['user']['Email'];
         $SDT = $_GET['SDT'];
         $DiaChi = $_GET['DiaChi'];
-        
+       
     $sql = "insert into dondathang (NgayDat, TinhTrangGiaoHang, DaThanhToan, MaTV ) values ('$NgayDat', 0, 0, $MaTV)";
 
     if ($connection != null) {
         try {
             $statement = $connection->prepare($sql);
             $statement->execute();
-            $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-            $thanhvien = $statement->fetchAll();
-
+            //$result = $statement->setFetchMode(PDO::FETCH_ASSOC);
             if ($statement->rowCount() > 0) {
-                $MaDDH = $thanhvien['MaDDH'] ??'';
+                $MaDDH = $connection->lastInsertId();
                     foreach ($_SESSION['cart'] as $key => $value) {
-                        $MaSP = $item['MaSP'];
+                        $MaSP = $value['MaSP'];
                         $SoLuong = $value['SoLuong'];
                         $TenSP = $value['TenSP'];
                         $DonGia = $value['DonGia'];
 
                         $sql = "insert into chitietdondathang (MaDDH , MaSP, TenSP, SoLuong, DonGia ) values
                          ('$MaDDH', '$MaSP', '$TenSP', '$SoLuong', '$DonGia')";
-                         $statement = $connection->prepare($sql);
-                         $statement->execute();
+                         try{
+                            $statement = $connection->prepare($sql);
+                            $statement->execute();
+                         }catch(PDOException $e) {
+                            echo "Cannot query database with column chitietdondathang";
+                        }
+                        
                     }
-                    echo "<script>alert(`Thanh toán thành công !`) </script>";
+                    unset($_SESSION['cart']);
+                    header('location: ../Front-end/index.php?message='.urldecode('<script>alert(`Thanh toán thành công !`) </script>'));
+                    
               }
 
             } 
