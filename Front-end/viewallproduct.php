@@ -6,7 +6,7 @@ require 'header.php';
             $recordsPerPage = 8;
             $page = isset($_GET['page']) ? $_GET['page'] : 1;
             $offset = ($page - 1) * $recordsPerPage;
-            $sql = "Select * from `sanpham` where DaXoa =1 AND MaLoaiSP = $MaLoaiSP";
+            $sql = "Select * from `sanpham` where DaXoa = 0 AND MaLoaiSP = $MaLoaiSP";
             $totalRecords;
             if($connection != null){
                 try{
@@ -29,7 +29,7 @@ require 'header.php';
    
                   $TenLoaiSP;
 
-                    $sql = $sql = "SELECT MaSP, TenSP, DonGia, CauHinh, HinhAnh FROM `sanpham` WHERE MaLoaiSP = $MaLoaiSP AND DaXoa=1 ORDER BY NgayCapNhap DESC LIMIT $recordsPerPage OFFSET $offset";
+                    $sql = $sql = "SELECT MaSP, TenSP, DonGia, CauHinh, HinhAnh FROM `sanpham` WHERE MaLoaiSP = $MaLoaiSP AND DaXoa=0 ORDER BY NgayCapNhap DESC LIMIT $recordsPerPage OFFSET $offset";
                     switch ($MaLoaiSP) {
                         case 1:
                             $TenLoaiSP = 'Điện Thoại';

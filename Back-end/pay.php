@@ -9,14 +9,15 @@
     if(!isset($_SESSION['user'])){
         header("location: ../Front-end/login.php");
     } else{
-
+        
         $MaTV = intval($_SESSION['user']['MaThanhVien']);
         $HoTen = $_SESSION['user']['username'];
         $Email = $_SESSION['user']['Email'];
         $SDT = $_GET['SDT'];
         $DiaChi = $_GET['DiaChi'];
+        $TongTien = $_GET['TongTien'];
        
-    $sql = "insert into dondathang (NgayDat, TinhTrangGiaoHang, DaThanhToan, MaTV ) values ('$NgayDat', 0, 0, $MaTV)";
+    $sql = "insert into dondathang (NgayDat, TinhTrangGiaoHang, DaThanhToan, MaTV,TongTien ) values ('$NgayDat', 0, 0, $MaTV, $TongTien)";
 
     if ($connection != null) {
         try {
@@ -42,6 +43,18 @@
                         
                     }
                     unset($_SESSION['cart']);
+
+                    $sql = "UPDATE `thanhvien` SET `DiaChi`='$DiaChi',`SoDienThoai`='$SDT' WHERE `MaThanhVien` =$MaTV";
+
+                  
+                     try{
+                        $statement = $connection ->prepare($sql);
+                        $statement->execute();
+                        } 
+                        catch(PDOException $e){
+                            echo "Cannot query database update thanhvien";
+                        }  
+                    
                     header('location: ../Front-end/index.php?message='.urldecode('<script>alert(`Thanh toán thành công !`) </script>'));
                     
               }
@@ -51,8 +64,10 @@
             echo "Cannot query database";
         }
     }
+    
 
     //header("location: ../Front-end/index.php");
 }
-    //header("location: ../Front-end/pay.php");
+    
+
 ?>

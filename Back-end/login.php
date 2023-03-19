@@ -3,6 +3,7 @@
 
 
     session_start();
+    
     $username = $_POST['username'];
     $password = $_POST['password'];
     $password = md5($password);
@@ -22,7 +23,17 @@ try{
             $MaLoaiTV = $thanhvien['MaLoaiTV'] ??'';
             $MaThanhVien = $thanhvien['MaThanhVien'] ??'';
             $Email = $thanhvien['Email'] ??'';
-            
+            if($MaLoaiTV ==3){
+                $_SESSION['admin'] = array(
+                    'username' => $HoTen,
+                    'loggedin' => true,
+                    'MaLoaiTV' => $MaLoaiTV,
+                    'MaThanhVien' => $MaThanhVien,
+                    'Email' => $Email
+                  );
+                  //print_r($_SESSION['admin']); return;
+                  header('Location: ../form_admin/Admin/index.php');
+            } else{
                 $_SESSION['user'] = array(
                     'username' => $HoTen,
                     'loggedin' => true,
@@ -31,6 +42,8 @@ try{
                     'Email' => $Email
                   );
                   header('Location: ../Front-end/index.php');
+            }
+                
            
         }
     } else {

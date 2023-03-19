@@ -28,7 +28,7 @@ if ($connection != null) {
             $error = "Tai khoan da ton tai";
             header('Location: ../Front-End/signup.php?error=' . urldecode($error));
         } else {
-            $sql = "insert into thanhvien (TaiKhoan, MatKhau, HoTen, Email, MaLoaiTV) values ('$username', '$password', '$fullname', '$Email',1)";
+            $sql = "insert into thanhvien (TaiKhoan, MatKhau, HoTen, Email, MaLoaiTV, DaXoa) values ('$username', '$password', '$fullname', '$Email',1, 0)";
 
             if ($connection != null) {
                 try {

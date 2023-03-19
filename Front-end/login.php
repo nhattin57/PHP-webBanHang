@@ -1,11 +1,17 @@
 <?php 
         require 'header.php';
+        if(isset($_SESSION['user']))
+            header('Location: ../Front-end/index.php');
+        if(isset($_SESSION['admin']))
+            header('Location: ../form_admin/Admin/index.php');
+
         $error = '';
         // Lấy dữ liệu từ form đăng nhập
         if (isset($_GET['error_message'])) {
             $error = $_GET['error_message'];
             // Display the error message
         }
+        
 ?>
     <!----end-menu----------->
 

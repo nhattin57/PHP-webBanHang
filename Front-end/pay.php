@@ -125,7 +125,7 @@
             <input class = "infor" min="10" name = "SDT"  required type="number">
             <p>Địa chỉ </p>
             <input class = "infor" name ="DiaChi" required type="text">
-            
+            <input  name ="TongTien" required type="hidden" value = "'.$totalMoney.'">
 
         </div>
        
