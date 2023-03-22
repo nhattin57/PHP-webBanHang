@@ -1,7 +1,9 @@
 <?php
   require '../../CauHinh/database.php';
   session_start();
-   
+   if(!$_SESSION['admin']){
+      header('Location: ../../Front-end/index.php ');
+   }
 ?>
 
 <!DOCTYPE html>

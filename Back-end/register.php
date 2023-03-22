@@ -11,13 +11,13 @@ $Email = $_POST['Email'];
 
 $error ='';
 // Function to validate user login
-$password = md5($password); // Hash the password using bcrypt
+
 if ($password  != $repassword) {
     $error = 'Mật khẩu không trùng nhau';
     header('Location: ../Front-End/signup.php?error=' . urldecode($error));
 }
+$password = md5($password); // Hash the password using bcrypt
 
-//$password = password_hash($password, PASSWORD_DEFAULT); // Hash the password using bcrypt
 
 $sql = "select *from thanhvien where TaiKhoan = '$username'";
 if ($connection != null) {

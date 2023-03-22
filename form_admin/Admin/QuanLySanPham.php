@@ -18,7 +18,7 @@
                         <div class="row element-button">
                             <div class="col-sm-2">
               
-                              <a class="btn btn-add btn-sm" href="form-add-san-pham.html" title="Thêm"><i class="fas fa-plus"></i>
+                              <a class="btn btn-add btn-sm" href="./form-add-san-pham.php" title="Thêm"><i class="fas fa-plus"></i>
                                 Tạo mới sản phẩm</a>
                             </div>  
                             <div class="col-sm-2">
@@ -45,43 +45,80 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                    <td>71309005</td>
-                                    <td>LAPTOP ACER ASPIRE A514-54-59QK</td>
-                                    <td><img src="" alt="" width="100px;"></td>
-                                    <td>40</td>
-                                    <td><span class="badge bg-success">Còn hàng</span></td>
-                                    <td>5.600.000 đ</td>
-                                    <td>Laptop</td>
-                                    <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                            onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                                        </button>
-                                        <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"data-target="#ModalUP">
-                                          <i class="fas fa-edit"></i>
-                                        </button>
-                                       
-                                    </td>
-                                </tr>
+                              <?php
+                                $sql = "SELECT * FROM `sanpham` WHERE DaXoa =0";
 
-                                <tr>
-                                  <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                  <td>71309005</td>
-                                  <td>LAPTOP ACER ASPIRE A514-54-59QK</td>
-                                  <td><img src="" alt="" width="100px;"></td>
-                                  <td>40</td>
-                                  <td><span class="badge bg-success">Còn hàng</span></td>
-                                  <td>5.600.000 đ</td>
-                                  <td>Laptop</td>
-                                  <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
-                                          onclick="myFunction(this)"><i class="fas fa-trash-alt"></i> 
-                                      </button>
-                                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"data-target="#ModalUP">
-                                        <i class="fas fa-edit"></i>
-                                      </button>
-                                     
-                                  </td>
-                              </tr>
+                                if($connection != null){
+                                try{
+                                    $statement = $connection ->prepare($sql);
+                                    $statement->execute();
+                                    $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                                    $sanphams = $statement->fetchAll();
+                                    if ($statement->rowCount() > 0) {
+                                      foreach($sanphams as $sanpham) {
+                                        $MaSP = $sanpham['MaSP'] ??'';
+                                        $TenSP = $sanpham['TenSP'] ??'';
+                                        $DonGia = $sanpham['DonGia'] ??'';
+                                        $CauHinh = $sanpham['CauHinh'] ??'';
+                                        $HinhAnh = $sanpham['HinhAnh'] ??'';
+                                        $SoLuongTon = $sanpham['SoLuongTon'] ??'';
+                                        $MaLoaiSP = $sanpham['MaLoaiSP'] ??'';
+                                        $LoaiSanPham;
+                                        switch ($MaLoaiSP) {
+                                          case 1:
+                                              $LoaiSanPham = 'Điện Thoại';
+                                              break;
+                                          case 2:
+                                              $LoaiSanPham = 'LapTop';
+                                              break;
+                                          case 3:
+                                              $LoaiSanPham = 'Máy tính bảng';
+                                              break;
+                                          case 4:
+                                              $LoaiSanPham = 'Phụ Kiện';
+                                              break;
+                                          default:
+                                              $LoaiSanPham = '';
+                                      }
+
+                                      echo
+                                      '<tr>
+                                      <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                      <td>'.$MaSP.'</td>
+                                      <td>$'.$TenSP.'</td>
+                                      <td><img src="../../HinhAnh/'.$HinhAnh.'" alt="" width="100px;"></td>
+                                      <td>'.$SoLuongTon.'</td>';
+                                      if($SoLuongTon >0)
+                                        echo '<td><span class="badge bg-success">Còn hàng</span></td>';
+                                      else
+                                        echo '<td><span class="badge bg-danger">Hết hàng</span></td>';
+                                      echo ' <td>'.number_format($DonGia, 0, '', ',').' đ</td>
+                                      <td>'.$LoaiSanPham.'</td>
+                                      <td class="del"><a href ="../back-end/xoaSanPham.php?MaSP='.$MaSP.'"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                              ><i class="fas fa-trash-alt"></i> 
+                                          </button></a>
+                                         <a href =""><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"data-target="#ModalUP">
+                                            <i class="fas fa-edit"></i>
+                                          </button></a>
+                                         
+                                      </td>
+                                  </tr>';
+                                      }
+                                      
+                                    } else {
+                                        // The statement doesn't have data
+                                       echo " no data";
+                                    }
+                                    
+                                    }catch(PDOException $e){
+                                        echo "Cannot query database";
+                                    }  
+                                }
+
+                              ?>
+                                
+
+                              
                             </tbody>
                         </table>
                     </div>
