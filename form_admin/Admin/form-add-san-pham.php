@@ -96,24 +96,24 @@ include './menu.php';
               <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i class="fas fa-folder-plus"></i> Thêm loại sản phẩm</a>
             </div>
           </div>
-          <form method="post" action="../back-end/themSanPham.php" class="row">
+          <form method="post" action="../back-end/themSanPham.php" class="row" enctype="multipart/form-data">>
 
             <div class="form-group col-md-3">
               <label class="control-label">Tên sản phẩm</label>
-              <input name="TenSP" class="form-control" type="text" placeholder="nhập tên sản phẩm">
+              <input name="TenSP" required class="form-control" type="text" placeholder="nhập tên sản phẩm">
             </div>
 
 
             <div class="form-group  col-md-3">
               <label class="control-label">Số lượng</label>
-              <input name="SoLuongNhap" class="form-control" type="number" placeholder="nhập số lượng">
+              <input name="SoLuongNhap" required class="form-control" type="number" placeholder="nhập số lượng">
             </div>
 
 
             <div class="form-group col-md-3">
               <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-              <select name="MaLoaiSP" class="form-control" id="exampleSelect1">
-                <option value="">-- Chọn loại sản phẩm --</option>
+              <select name="MaLoaiSP" required class="form-control" id="exampleSelect1">
+                
                 <?php
                 $sql = "SELECT `MaLoaiSP`, `TenLoai` FROM `loaisanpham` ";
                 if ($connection != null) {
@@ -141,8 +141,8 @@ include './menu.php';
 
             <div class="form-group col-md-3 ">
               <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-              <select name="MaNCC" class="form-control" id="exampleSelect1">
-                <option value="">-- Chọn nhà cung cấp --</option>
+              <select name="MaNCC" required class="form-control" id="exampleSelect1">
+                
                 <?php
                 $sql = "SELECT `MaNCC`, `TenNCC` FROM `nhacungcap`";
                 if ($connection != null) {
@@ -167,8 +167,8 @@ include './menu.php';
 
             <div class="form-group col-md-3 ">
               <label for="exampleSelect1" class="control-label">Nhà sản xuất</label>
-              <select name="MaNSX" class="form-control" id="exampleSelect1">
-                <option value="">-- Chọn nhà sản xuất--</option>
+              <select name="MaNSX" required class="form-control" id="exampleSelect1">
+                
                 <?php
                 $sql = "SELECT `MaNSX`, `TenNSX` FROM `nhasanxuat`";
                 if ($connection != null) {
@@ -193,13 +193,13 @@ include './menu.php';
 
             <div class="form-group col-md-3">
               <label class="control-label">Giá bán</label>
-              <input name="DonGia" class="form-control" type="number" placeholder="nhập giá bán">
+              <input name="DonGia" required class="form-control" type="number" placeholder="nhập giá bán">
             </div>
             <!-- onchange="readURL(this);" -->
             <div class="form-group col-md-12">
               <label class="control-label">Ảnh sản phẩm</label>
               <div id="myfileupload">
-                <input type="file" id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+                <input type="file" required id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
               </div>
               <div id="thumbbox">
                 <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -212,17 +212,16 @@ include './menu.php';
 
             </div>
             <div class="form-group col-md-12">
-              <label class="control-label">Mô tả sản phẩm</label>
-              <textarea class="form-control" name="mota" id="mota"></textarea>
+              <label class="control-label">Cấu hình sản phẩm</label>
+              <textarea class="form-control" name="CauHinh" id="mota"></textarea>
               <script>
                 CKEDITOR.replace('mota');
               </script>
             </div>
 
-            <div style="float: right; margin-bottom: 5px;">
-              <a class="btn btn-save" name= "submit" type="submit" style="margin-right: 10px;">Lưu lại</a>
+              <input class="btn btn-save" type="submit" style="margin-right: 10px;" name="submit" value="Lưu Lại">
               <a class="btn btn-cancel" href="QuanLySanPham.html">Hủy bỏ</a>
-            </div>
+            
           </form>
         </div>
 
