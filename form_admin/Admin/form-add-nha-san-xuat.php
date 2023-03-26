@@ -17,14 +17,14 @@
           <div class="tile">
             <h3 class="tile-title">Tạo mới nhà sản xuất</h3>
             <div class="tile-body">
-              <form class="row">
+              <form class="row" action="../back-end/themNSX.php" method="get">
                 <div class="form-group col-md-4">
                   <label class="control-label">Tên nhà sản xuất</label>
-                  <input class="form-control" type="text" placeholder="nhập tên nhà sản xuất">
+                  <input class="form-control" name="TenNSX" type="text" placeholder="nhập tên nhà sản xuất">
                 </div>
                 <div class="form-group col-md-4">
                   <label class="control-label">Thông tin</label>
-                  <input class="form-control" type="text" placeholder="nhập thông tin">
+                  <input class="form-control" name="ThongTin" type="text" placeholder="nhập thông tin">
                 </div>
             <div class="tile-footer">
             </div>
@@ -32,9 +32,10 @@
           
         </div>
         <div style="float: right; margin-bottom: 5px;">
-          <button class="btn btn-save" type="button" style="margin-right: 10px;">Lưu lại</button>
+          <input type="submit" class="btn btn-save" style="margin-right: 10px;" value="Lưu lại">
         <a class="btn btn-cancel" href="NhaSanXuat.html">Hủy bỏ</a>
         </div>
+  </form>
     </main>
 
  <!--

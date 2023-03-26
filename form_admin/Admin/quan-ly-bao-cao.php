@@ -1,6 +1,7 @@
 <?php
   include './header.php';
   include './menu.php';
+  include '../back-end/thongke.php';
 ?>
    <!-- Sidebar menu-->
 
@@ -21,7 +22,7 @@
                 <div class="widget-small info coloured-icon"><i class='icon bx bxs-purchase-tag-alt fa-3x' ></i>
                     <div class="info">
                         <h4>Tổng sản phẩm</h4>
-                        <p><b>8580 sản phẩm</b></p>
+                        <p><b><?php echo $SoLuongSanPham ?> sản phẩm</b></p>
                     </div>
                 </div>
             </div>
@@ -29,7 +30,7 @@
                 <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-shopping-bag-alt'></i>
                     <div class="info">
                         <h4>Tổng đơn hàng</h4>
-                        <p><b>457 đơn hàng</b></p>
+                        <p><b><?php echo $SoLuongDonDatHang ?> đơn hàng</b></p>
                     </div>
                 </div>
             </div>
@@ -38,7 +39,7 @@
                 <div class="widget-small primary coloured-icon"><i class='icon fa-3x bx bxs-chart' ></i>
                     <div class="info">
                         <h4>Tổng thu nhập</h4>
-                        <p><b>104.890.000 đ</b></p>
+                        <p><b><?php echo number_format($TongDoanhThu, 0, '', ',') ?> đ</b></p>
                     </div>
                 </div>
             </div>
@@ -47,7 +48,7 @@
                 <div class="widget-small warning coloured-icon"><i class='icon fa-3x bx bxs-tag-x' ></i>
                     <div class="info">
                         <h4>Hết hàng</h4>
-                        <p><b>1 sản phẩm</b></p>
+                        <p><b><?php echo $SoLuongSanPhamHetHang ?> sản phẩm</b></p>
                     </div>
                 </div>
             </div>

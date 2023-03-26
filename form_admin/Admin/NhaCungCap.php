@@ -18,7 +18,7 @@
               <div class="row element-button">
                 <div class="col-sm-2">
   
-                  <a class="btn btn-add btn-sm" href="form-add-nha-cung-cap.html" title="Thêm"><i class="fas fa-plus"></i>
+                  <a class="btn btn-add btn-sm" href="form-add-nha-cung-cap.php" title="Thêm"><i class="fas fa-plus"></i>
                     Tạo mới</a>
                 </div>
                 
@@ -39,30 +39,44 @@
                                     <th>Địa chỉ</th>
                                     <th>Email</th>
                                     <th>SDT</th>
-                                    <th>Chức năng</th>
+                                    <th style="text-align: center;">Sửa</th>
                                 </tr>
                             </thead>
                             <tbody>
-                              <tr>
-                                <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                                <td>Nguyễn Trung Thành</td>
-                                <td>163 Thống Nhất</td>
-                                <td>trungthanh0199@gmail.com</td>
-                                <td>0352180875</td>
-                                <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
-                                  <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                  data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
-                            </tr>
-                            <tr>
-                              <td width="10"><input type="checkbox" name="check1" value="1"></td>
-                              <td>Nguyễn Trung Thành</td>
-                              <td>163 Thống Nhất</td>
-                              <td>trungthanh0199@gmail.com</td>
-                              <td>0352180875</td>
-                              <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i></button>
-                                <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                                data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
-                          </tr>
+                            <?php
+                              $sql = "SELECT * FROM `nhacungcap`";
+                              if ($connection != null) {
+                                try {
+                                  $statement = $connection->prepare($sql);
+                                  $statement->execute();
+                                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                                  $nhacungcaps = $statement->fetchAll();
+                                  foreach ($nhacungcaps as $nhacungcap) {
+                                    $MaNCC = $nhacungcap['MaNCC'] ?? '';
+                                    $TenNCC = $nhacungcap['TenNCC'] ?? '';
+                                    $DiaChi = $nhacungcap['DiaChi'] ?? '';
+                                    $Email = $nhacungcap['Email'] ?? '';
+                                    $SDT = $nhacungcap['SDT'] ?? '';
+
+                                    echo ' <tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>'.$TenNCC.'</td>
+                                    <td>'.$DiaChi.'</td>
+                                    <td>'.$Email.'</td>
+                                    <td>'.$SDT.'</td>
+                                    <td class="del"> 
+                                      
+                                    <a href =""><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a></td>
+                                </tr>';
+                                  }
+                                } catch (PDOException $e) {
+                                  echo "Cannot query database";
+                                }
+                              }
+                              ?>
+
+                             
                             </tbody>
                         </table>
                     </div>
@@ -74,50 +88,7 @@
      <!--
   MODAL
 -->
-<div class="modal fade" id="ModalUP" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-data-keyboard="false">
-<div class="modal-dialog modal-dialog-centered" role="document">
-  <div class="modal-content">
 
-    <div class="modal-body">
-      <div class="row">
-        <div class="form-group  col-md-12">
-          <span class="thong-tin-thanh-toan">
-            <h5>Chỉnh sửa thông tin đơn hàng</h5>
-          </span>
-        </div>
-      </div>
-      <div class="row">
-        <div class="form-group col-md-6">
-            <label class="control-label">Tên nhà cung cấp</label>
-          <input class="form-control" type="text" required value="">
-        </div>
-        <div class="form-group  col-md-6">
-            <label class="control-label">Địa chỉ</label>
-          <input class="form-control" type="text" required value="">
-        </div>
-        <div class="form-group  col-md-6">
-          <label class="control-label">Email</label>
-          <input class="form-control" type="text" required value="">
-        </div>
-        <div class="form-group  col-md-6">
-          <label class="control-label">Số điện thoại</label>
-          <input class="form-control" type="number" required value="">
-        </div>
-      </div>
-      
-      <BR>
-      <div style="float: right;">
-          <button class="btn btn-save" type="button">Lưu lại</button>
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-      </div>
-      <BR>
-    </div>
-    <div class="modal-footer">
-    </div>
-  </div>
-</div>
-</div>
 <!--
 MODAL
 -->
@@ -138,32 +109,32 @@ MODAL
   <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
   <script type="text/javascript">$('#sampleTable').DataTable();</script>
   <script>
-    function deleteRow(r) {
-      var i = r.parentNode.parentNode.rowIndex;
-      document.getElementById("myTable").deleteRow(i);
-    }
-    jQuery(function () {
-      jQuery(".trash").click(function () {
-        swal({
-          title: "Cảnh báo",
+    // function deleteRow(r) {
+    //   var i = r.parentNode.parentNode.rowIndex;
+    //   document.getElementById("myTable").deleteRow(i);
+    // }
+    // jQuery(function () {
+    //   jQuery(".trash").click(function () {
+    //     swal({
+    //       title: "Cảnh báo",
          
-          text: "Bạn có chắc chắn là muốn xóa?",
-          buttons: ["Hủy bỏ", "Đồng ý"],
-        })
-          .then((willDelete) => {
-            if (willDelete) {
-              swal("Đã xóa thành công.!", {
+    //       text: "Bạn có chắc chắn là muốn xóa?",
+    //       buttons: ["Hủy bỏ", "Đồng ý"],
+    //     })
+    //       .then((willDelete) => {
+    //         if (willDelete) {
+    //           swal("Đã xóa thành công.!", {
                 
-              });
-            }
-          });
-      });
-    });
-    oTable = $('#sampleTable').dataTable();
-    $('#all').click(function (e) {
-      $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-      e.stopImmediatePropagation();
-    });
+    //           });
+    //         }
+    //       });
+    //   });
+    // });
+    // oTable = $('#sampleTable').dataTable();
+    // $('#all').click(function (e) {
+    //   $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
+    //   e.stopImmediatePropagation();
+    // });
 
     //Thời Gian
     function time() {

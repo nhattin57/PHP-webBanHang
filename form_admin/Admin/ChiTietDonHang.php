@@ -1,6 +1,7 @@
 <?php
   include './header.php';
   include './menu.php';
+  $MaDDH = $_GET['MaDHH'] ?? 0;
 ?>
   <!-- Sidebar menu-->
  
@@ -18,13 +19,25 @@
             <div class="tile-body">
               <div class="row element-button">
                 
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                   <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
                       class="fas fa-file-pdf"></i> Xuất PDF</a>
                 </div>
                 <div class="col-sm-2">
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                </div> -->
+                <div class="form-group col-md-3 ">
+                  <form action="../back-end/DoiTrangThaiDonHang.php">
+                    <input type="hidden" name="MaDHH" value="<?php echo $MaDDH ?>">
+                <label for="exampleSelect1" class="control-label">Trạng thái đơn hàng</label>
+                <select name="TinhTrang" required class="form-control"  id="exampleSelect1">
+                  <option value="1">Chờ xử lý</option>
+                  <option value="2">Đang Giao</option>
+                  <option value="3">Đã hoàn thành</option>
+                </select>
+                <input class="btn btn-save" style="margin-top: 5px;" type="submit" value="Lưu">
+                </form>
                 </div>
               </div>
               <table class="table table-hover table-bordered" id="sampleTable">
@@ -33,27 +46,61 @@
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Tên SP<th>
+                    <th>Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
                     <th>Ngày đặt</th>
-                    <th>Tình trạng</th>
-                    <th>Chức năng</th>
+                  
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                <?php
+                              $sql = "SELECT a.MaDDH, a.NgayDat, a.TongTien, b.HoTen, c.TenSP, c.SoLuong, c.DonGia
+                              FROM dondathang a, thanhvien b, chitietdondathang c
+                              WHERE a.MaDDH = $MaDDH AND a.MaDDH=c.MaDDH AND a.MaTV=b.MaThanhVien;";
+                              if ($connection != null) {
+                                try {
+                                  $statement = $connection->prepare($sql);
+                                  $statement->execute();
+                                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                                  $dondathangs = $statement->fetchAll();
+                                  foreach ($dondathangs as $dondathang) {
+                                    
+                                    $NgayDat = $dondathang['NgayDat'] ?? '';
+                                    $TongTien= $dondathang['TongTien'] ?? '';
+                                    $HoTen= $dondathang['HoTen'] ?? '';
+                                    $TenSP= $dondathang['TenSP'] ?? '';
+                                    $SoLuong= $dondathang['SoLuong'] ?? '';
+                                    $DonGia= $dondathang['DonGia'] ?? '';
+                                    $TongTien =0;
+                                    $TongTien = $SoLuong * $DonGia;
+                                    echo '<tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>'.$MaDDH.'</td>
+                                    <td>'.$HoTen.'</td>
+                                    <th>'.$TenSP.'<th>
+                                    <td>'.number_format($DonGia, 0, '', ',').'</td>
+                                    <td>'.$SoLuong.'</td>
+                                    <td>'.number_format($TongTien, 0, '', ',').'</td>
+                                    <td>'.$NgayDat.'</td>
+                                    </tr>';
+                                  
+                                  }
+                                } catch (PDOException $e) {
+                                  echo "Cannot query database";
+                                }
+                              }
+                              ?>
+                  <!-- <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
                     <td>MD0837</td>
                     <td>Nguyễn Trung Thành</td>
-                    <td>LAPTOP ACER ASPIRE A514-54-59QK</td>
-                    <td>2</td>
+                    <td>Nguyễn Trung Thành</td>
                     <td>9.400.000 đ</td>
                     <td>17/03/2023</td>
                     <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
@@ -80,7 +127,7 @@
                     <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
                       <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                       data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>

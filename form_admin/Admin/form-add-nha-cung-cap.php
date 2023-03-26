@@ -20,30 +20,32 @@
                 
   
               </div>
-              <form class="row">
+              <form class="row" action="../back-end/themNhaCungcap.php" method="post">
                 <div class="form-group col-md-3">
                   <label class="control-label">Tên nhà cung cấp</label>
-                  <input class="form-control" type="text" placeholder="nhập tên nhà cung cấp">
+                  <input class="form-control" name="TenNCC" type="text" required placeholder="nhập tên nhà cung cấp">
                 </div>
                 <div class="form-group col-md-3">
                   <label class="control-label">Địa chỉ</label>
-                  <input class="form-control" type="text" placeholder="nhập địa chỉ">
+                  <input class="form-control" name="DiaChi" required type="text" placeholder="nhập địa chỉ">
                 </div>
                 <div class="form-group col-md-3">
                   <label class="control-label">Email</label>
-                  <input class="form-control" type="text" placeholder="nhập email">
+                  <input class="form-control" name="Email" required type="text" placeholder="nhập email">
                 </div>
                 <div class="form-group col-md-3">
                   <label class="control-label">Số điện thoại</label>
-                  <input class="form-control" type="number" placeholder="nhập số điện thoại">
+                  <input class="form-control" name="SDT" required type="number" placeholder="nhập số điện thoại">
                 </div>
+              
           </div>
           
         </div>
         <div style="float: right; margin-bottom: 5px;">
-          <button class="btn btn-save" type="button" style="margin-right: 10px;">Lưu lại</button>
-        <a class="btn btn-cancel" href="NhaCungCap.html">Hủy bỏ</a>
+          <input type="submit" class="btn btn-save" style="margin-right: 10px;" value="Lưu lại">
+        <a class="btn btn-cancel" href="NhaCungCap.php">Hủy bỏ</a>
         </div>
+        </form>
     </main>
 
   <!-- Essential javascripts for application to work-->
