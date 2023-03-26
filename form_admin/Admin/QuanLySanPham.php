@@ -85,7 +85,7 @@
                                       '<tr>
                                       <td width="10"><input type="checkbox" name="check1" value="1"></td>
                                       <td>'.$MaSP.'</td>
-                                      <td>$'.$TenSP.'</td>
+                                      <td>'.$TenSP.'</td>
                                       <td><img src="../../HinhAnh/'.$HinhAnh.'" alt="" width="100px;"></td>
                                       <td>'.$SoLuongTon.'</td>';
                                       if($SoLuongTon >0)
@@ -94,10 +94,10 @@
                                         echo '<td><span class="badge bg-danger">Hết hàng</span></td>';
                                       echo ' <td>'.number_format($DonGia, 0, '', ',').' đ</td>
                                       <td>'.$LoaiSanPham.'</td>
-                                      <td class="del"><a href ="../back-end/xoaSanPham.php?MaSP='.$MaSP.'"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                      <td class=""><a onclick= "return confirm(`Bạn có chắc muốn xóa sản phẩm này không`);" href ="../back-end/xoaSanPham.php?MaSP='.$MaSP.'"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                               ><i class="fas fa-trash-alt"></i> 
                                           </button></a>
-                                         <a href =""><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"data-target="#ModalUP">
+                                         <a href ="./chinhSuaSP.php?MaSP='.$MaSP.'"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"data-target="#ModalUP">
                                             <i class="fas fa-edit"></i>
                                           </button></a>
                                          
@@ -247,33 +247,7 @@ MODAL
       }
     }
     </script>
-    <script>
-        function deleteRow(r) {
-            var i = r.parentNode.parentNode.rowIndex;
-            document.getElementById("myTable").deleteRow(i);
-        }
-        jQuery(function () {
-            jQuery(".trash").click(function () {
-                swal({
-                    title: "Cảnh báo",
-                    text: "Bạn có chắc chắn là muốn xóa sản phẩm này?",
-                    buttons: ["Hủy bỏ", "Đồng ý"],
-                })
-                    .then((willDelete) => {
-                        if (willDelete) {
-                            swal("Đã xóa thành công.!", {
-
-                            });
-                        }
-                    });
-            });
-        });
-        oTable = $('#sampleTable').dataTable();
-        $('#all').click(function (e) {
-            $('#sampleTable tbody :checkbox').prop('checked', $(this).is(':checked'));
-            e.stopImmediatePropagation();
-        });
-    </script>
+    
 </body>
 
 </html>

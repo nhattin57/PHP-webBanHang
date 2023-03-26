@@ -78,42 +78,84 @@ include './header.php';
 <!-- Sidebar menu-->
 <?php
 include './menu.php';
+ $error = $_GET['error'] ?? '';
+ $MaSP = $_GET['MaSP'] ??'';
+ $TenSP;
+ $DonGia;
+ $CauHinh;
+ $MaLoaiSP;
+ $HinhAnh;
+ $SoLuong;
+ $MaNSX;
+ $TenNSX;
+ $TenNCC;
+ $MaNCC;
+ $MaLoaiSP;
+ $TenLoaiSP;
+ $sql = "select TenSP, DonGia, CauHinh, SoLuongTon, a.MaLoaiSP,HinhAnh, b.MaNSX,b.TenNSX, c.MaNCC, c.TenNCC, d.MaLoaiSP, d.TenLoai FROM `sanpham` a, `nhasanxuat` b, `nhacungcap` c, `loaisanpham` d WHERE MaSP=$MaSP AND a.MaNCC=c.MaNCC AND a.MaLoaiSP=d.MaLoaiSP AND a.MaNSX=b.MaNSX";
+if($connection != null){
+try{
+    $statement = $connection ->prepare($sql);
+    $statement->execute();
+    $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+    $sanphams = $statement->fetchAll();
+    if ($statement->rowCount() > 0) {
+        // The statement has data djd
+        foreach($sanphams as $sanpham) {
+        $TenSP = $sanpham['TenSP'] ?? '';
+        $DonGia = $sanpham['DonGia'] ?? '';
+        $CauHinh = $sanpham['CauHinh'] ?? '';
+        $MaLoaiSP = $sanpham['MaLoaiSP'] ?? '';
+        $CauHinh = $sanpham['CauHinh'] ?? '';
+        $HinhAnh = $sanpham['HinhAnh'] ?? '';
+        $SoLuong = $sanpham['SoLuongTon'] ?? '';
+        $MaNSX = $sanpham['MaNSX'] ?? '';
+        $TenNSX = $sanpham['TenNSX'] ?? '';
+        $MaNCC = $sanpham['MaNCC'] ?? '';
+        $TenNCC = $sanpham['TenNCC'] ?? '';
+        $MaLoaiSP = $sanpham['MaLoaiSP'] ?? '';
+        $TenLoaiSP = $sanpham['TenLoai'] ?? '';
+      }
+      }
+    }catch(PDOException $e){
+        echo "Cannot query database";
+    }  
+  }
+
+
 ?>
 <main class="app-content">
   <div class="app-title">
     <ul class="app-breadcrumb breadcrumb">
       <li class="breadcrumb-item">Danh sách sản phẩm</li>
-      <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+      <li class="breadcrumb-item"><a href="#">Chỉnh sửa sản phẩm</a></li>
     </ul>
   </div>
   <div class="row">
     <div class="col-md-12">
       <div class="tile">
-        <h3 class="tile-title">Tạo mới sản phẩm</h3>
+        <h3 class="tile-title">Chỉnh sửa sản phẩm</h3>
         <div class="tile-body">
-          <div class="row element-button">
-            <div class="col-sm-2">
-              <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i class="fas fa-folder-plus"></i> Thêm loại sản phẩm</a>
-            </div>
-          </div>
-          <form method="post" action="../back-end/themSanPham.php" class="row" enctype="multipart/form-data">>
-
+         
+          <form method="post" action="../back-end/suaSanPham.php" class="row" enctype="multipart/form-data">
+            <input type="hidden" name="MaSP" value="<?php echo $MaSP ?>">
+            <h2 style="color: red;"><?php echo $error; ?></h2>
             <div class="form-group col-md-3">
               <label class="control-label">Tên sản phẩm</label>
-              <input name="TenSP" required class="form-control" type="text" placeholder="nhập tên sản phẩm">
+              <input name="TenSP" value="<?php echo $TenSP ?>" required class="form-control" type="text" placeholder="nhập tên sản phẩm">
             </div>
 
 
             <div class="form-group  col-md-3">
               <label class="control-label">Số lượng</label>
-              <input name="SoLuongNhap" required class="form-control" type="number" placeholder="nhập số lượng">
+              <input name="SoLuongNhap" value="<?php echo $SoLuong ?>" required class="form-control" type="number" placeholder="nhập số lượng">
             </div>
 
 
             <div class="form-group col-md-3">
               <label for="exampleSelect1" class="control-label">Loại sản phẩm</label>
-              <select name="MaLoaiSP" required class="form-control" id="exampleSelect1">
-                
+              <select name="MaLoaiSP"  class="form-control" id="exampleSelect1">
+                <option value="<?php echo $MaLoaiSP ?>"><?php echo $TenLoaiSP ?></option>
                 <?php
                 $sql = "SELECT `MaLoaiSP`, `TenLoai` FROM `loaisanpham` ";
                 if ($connection != null) {
@@ -133,16 +175,15 @@ include './menu.php';
                   }
                 }
                 ?>
-                <!-- <option value="" >Điện thoại</option>
-                  <option>Laptop</option> -->
+              
 
               </select>
             </div>
 
             <div class="form-group col-md-3 ">
               <label for="exampleSelect1" class="control-label">Nhà cung cấp</label>
-              <select name="MaNCC" required class="form-control" id="exampleSelect1">
-                
+              <select name="MaNCC"  class="form-control" id="exampleSelect1">
+              <option value="<?php echo $MaNCC ?>"><?php echo $TenNCC ?></option>
                 <?php
                 $sql = "SELECT `MaNCC`, `TenNCC` FROM `nhacungcap`";
                 if ($connection != null) {
@@ -167,8 +208,8 @@ include './menu.php';
 
             <div class="form-group col-md-3 ">
               <label for="exampleSelect1" class="control-label">Nhà sản xuất</label>
-              <select name="MaNSX" required class="form-control" id="exampleSelect1">
-                
+              <select name="MaNSX"  class="form-control" id="exampleSelect1">
+              <option value="<?php echo $MaNSX ?>"><?php echo $TenNSX ?></option>
                 <?php
                 $sql = "SELECT `MaNSX`, `TenNSX` FROM `nhasanxuat`";
                 if ($connection != null) {
@@ -190,19 +231,20 @@ include './menu.php';
                 ?>
               </select>
             </div>
-
-            <div class="form-group col-md-3">
+            
+            <div class="form-group col-md-3"> 
               <label class="control-label">Giá bán</label>
-              <input name="DonGia" required class="form-control" type="number" placeholder="nhập giá bán">
+              <input name="DonGia" value="<?php echo $DonGia ?>" required class="form-control" type="number" placeholder="nhập giá bán">
             </div>
             <!-- onchange="readURL(this);" -->
             <div class="form-group col-md-12">
               <label class="control-label">Ảnh sản phẩm</label>
               <div id="myfileupload">
-                <input type="file" required id="uploadfile" name="ImageUpload" onchange="readURL(this);" />
+            
+                <input type="file" accept="image/png"  id="uploadfile" value="<?php echo $HinhAnh ?>" name="ImageUpload" onchange="readURL(this);" />
               </div>
               <div id="thumbbox">
-                <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
+                <img src="../../HinhAnh/<?php echo $HinhAnh ?>" height="450" width="400" alt="Thumb image" id="thumbimage" style="display: block" />
                 <a class="removeimg" href="javascript:"></a>
               </div>
               <div id="boxchoice">
@@ -213,14 +255,13 @@ include './menu.php';
             </div>
             <div class="form-group col-md-12">
               <label class="control-label">Cấu hình sản phẩm</label>
-              <textarea class="form-control" name="CauHinh" id="mota"></textarea>
+              <textarea class="form-control" name="CauHinh" id="mota"><?php echo $CauHinh ?></textarea>
               <script>
                 CKEDITOR.replace('mota');
               </script>
             </div>
-
+                <!-- btn btn-save -->
               <input class="btn btn-save" type="submit" style="margin-right: 10px;" name="submit" value="Lưu Lại">
-              <a class="btn btn-cancel" href="QuanLySanPham.html">Hủy bỏ</a>
             
           </form>
         </div>
@@ -234,66 +275,7 @@ include './menu.php';
 <!--
   MODAL Loại sản phẩm
 -->
-<div class="modal fade" id="adddanhmuc" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" data-backdrop="static" data-keyboard="false">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
 
-      <div class="modal-body">
-        <div class="row">
-          <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
-              <h5>Thêm mới loại sản phẩm</h5>
-            </span>
-          </div>
-          <form action="../back-end/themLoaiSP.php" method="get">
-          <div class="form-group col-md-12">
-            <label class="control-label">Nhập tên loại sản phẩm mới</label>
-            <input class="form-control" name="TenLoai" type="text" required>
-          </div>
-          <div class="form-group col-md-12">
-            <label class="control-label">Bí danh</label>
-            <input class="form-control" name="BiDanh" type="text" required>
-          </div>
-          
-          <div class="form-group col-md-12">
-            <label class="control-label">Loại sản phẩm hiện đang có</label>
-            <ul style="padding-left: 20px;">
-            
-            <?php
-                $sql = "SELECT `MaLoaiSP`, `TenLoai` FROM `loaisanpham` ";
-                if ($connection != null) {
-                  try {
-                    $statement = $connection->prepare($sql);
-                    $statement->execute();
-                    $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                    $loaisanphams = $statement->fetchAll();
-                    foreach ($loaisanphams as $loaisanpham) {
-                      $MaLoaiSP = $loaisanpham['MaLoaiSP'] ?? '';
-                      $TenLoaiSP = $loaisanpham['TenLoai'] ?? '';
-
-                      echo '<li>'.$TenLoaiSP.'</li>';
-                    }
-                  } catch (PDOException $e) {
-                    echo "Cannot query database";
-                  }
-                }
-                ?>
-
-            </ul>
-          </div>
-        </div>
-        <div style="float: right; margin-bottom: 5px;">
-          <input type="submit" class="btn btn-save" value="Lưu lại">
-          <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
-        </div>
-        </form>
-        <BR>
-      </div>
-      <div class="modal-footer">
-      </div>
-    </div>
-  </div>
-</div>
 <!--
 MODAL
 -->
@@ -305,7 +287,7 @@ MODAL
 
 
 
-<script src="js/jquery-3.2.1.min.js"></script>
+<!-- <script src="js/jquery-3.2.1.min.js"></script>
 <script src="js/popper.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script src="js/main.js"></script>
@@ -328,7 +310,7 @@ MODAL
       reader.readAsDataURL(file);
     }
   });
-</script>
+</script> -->
 </body>
 
 </html>

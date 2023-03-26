@@ -70,6 +70,7 @@
                       <th>Tên khách hàng</th>
                       <th>Tổng tiền</th>
                       <th>Trạng thái</th>
+                      <th>Xem chi tiết</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -101,12 +102,24 @@
                                   if( $TinhTrangGiaoHang ==0 && $DaThanhToan==0){
                                     echo '<span class="badge bg-info">Chờ xử lý</span>
                                             </td>
+                                            <td class="del"> 
+                                      
+                                    <a href ="./ChiTietDonHang.php?MaDHH='.$MaDDH.'"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a></td>
                                         </tr>';
                                   } else if($TinhTrangGiaoHang ==1 && $DaThanhToan==0){
                                     echo '<span class="badge bg-warning">Đang vận chuyển</span></td>
+                                    <td class="del"> 
+                                      
+                                    <a href ="./ChiTietDonHang.php?MaDHH='.$MaDDH.'"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a></td>
                                         </tr>';
                                   }else{
                                     echo '<span class="badge bg-success">Đã hoàn thành</span></td>
+                                    <td class="del"> 
+                                      
+                                    <a href ="./ChiTietDonHang.php?MaDHH='.$MaDDH.'"><button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
+                                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></a></td>
                                         </tr>';
                                   }
                                 }
