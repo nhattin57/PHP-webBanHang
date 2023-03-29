@@ -15,7 +15,7 @@ require 'header.php';
 <?php
    
                   $TenLoaiSP;
-                    $sql = 'SELECT MaSP, TenSP, DonGia, CauHinh,HinhAnh FROM `sanpham` WHERE MaNSX = '.$MaNSX.' AND MaLoaiSP = '.$MaLoaiSP.' ORDER BY NgayCapNhap DESC';
+                    $sql = 'SELECT MaSP, TenSP, DonGia, CauHinh,HinhAnh FROM `sanpham` WHERE MaNSX = '.$MaNSX.' AND MaLoaiSP = '.$MaLoaiSP.' AND DaXoa=0 ORDER BY NgayCapNhap DESC';
                     switch ($MaLoaiSP) {
                         case 1:
                             $TenLoaiSP = 'Điện Thoại';

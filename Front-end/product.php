@@ -73,7 +73,7 @@ require 'header.php';
                                         <ul class="product-content-right-product-item-ul">
                                             <li>
                                                 <i class="fa fa-check-circle"></i>
-                                                '.$CauHinh.'
+                                                '.html_entity_decode($CauHinh).'
                                             </li>
                                             
                                         </ul>

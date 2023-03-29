@@ -84,7 +84,7 @@
                                     <b style="font-size: 16px;color: #ee2724;">đ</b>
                                 </div>
                                 <div class="cart-header-left-delete">
-                                    <a class="fa fa-trash" onclick ="return confirm(`Bạn có muốn xóa không`)" href="../Back-end/cartAction.php?MaSP='.$MaSP.'"></a>
+                                    <a class="fa fa-trash" onclick ="return confirm(`Bạn có muốn xóa không`);" href="../Back-end/cartAction.php?MaSP='.$MaSP.'"></a>
                                 </div>
                             </div>
                         </div>';
@@ -125,7 +125,7 @@
             <input class = "infor" min="10" name = "SDT"  required type="number">
             <p>Địa chỉ </p>
             <input class = "infor" name ="DiaChi" required type="text">
-            
+            <input  name ="TongTien" required type="hidden" value = "'.$totalMoney.'">
 
         </div>
        

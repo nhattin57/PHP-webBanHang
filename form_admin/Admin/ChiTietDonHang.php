@@ -1,115 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <title>Danh sách đơn hàng | Quản trị Admin</title>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Main CSS-->
-  <link rel="stylesheet" type="text/css" href="css/main.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-  <!-- or -->
-  <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
-
-  <!-- Font-icon css-->
-  <link rel="stylesheet" type="text/css"
-    href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
-
-</head>
-
-<body onload="time()" class="app sidebar-mini rtl">
-  <!-- Navbar-->
-  <header class="app-header">
-    <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-      aria-label="Hide Sidebar"></a>
-    <!-- Navbar Right Menu-->
-    <ul class="app-nav">
-
-
-      <!-- User Menu-->
-      <li><a class="app-nav__item" href="index.html"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-      </li>
-    </ul>
-  </header>
+<?php
+  include './header.php';
+  include './menu.php';
+  $MaDDH = $_GET['MaDHH'] ?? 0;
+?>
   <!-- Sidebar menu-->
- <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
- <aside class="app-sidebar">
-   <div class="app-sidebar__user">
-     <div>
-       <p class="app-sidebar__user-name"><b>Trung Thành</b></p>
-       <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-     </div>
-   </div>
-   <hr>
-   <ul class="app-menu">
-
-     <li>
-       <a class="app-menu__item" href="index.html">
-         <i class='app-menu__icon bx bx-tachometer'></i>
-         <span class="app-menu__label">Bảng điều khiển
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item " href="QuanLyThanhVien.html">
-         <i class='app-menu__icon bx bx-user-voice'></i>
-         <span class="app-menu__label">Quản lý khách hàng
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item" href="QuanLySanPham.html">
-         <i class='app-menu__icon bx bx-purchase-tag-alt'></i>
-         <span class="app-menu__label">
-           Quản lý sản phẩm
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item active" href="QuanLyDonHang.html">
-         <i class='app-menu__icon bx bx-task'></i>
-         <span class="app-menu__label">
-           Quản lý đơn hàng
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item " href="NhaCungCap.html">
-         <i class='app-menu__icon bx bx-book-add'></i>
-         <span class="app-menu__label">
-           Nhà cung cấp
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item " href="NhaSanXuat.html">
-         <i class='app-menu__icon bx bx-building-house'></i>
-         <span class="app-menu__label">
-           Nhà sản xuất
-         </span>
-       </a>
-     </li>
-
-     <li>
-       <a class="app-menu__item" href="quan-ly-bao-cao.html">
-         <i class='app-menu__icon bx bx-pie-chart-alt-2'></i>
-         <span class="app-menu__label">
-           Báo cáo doanh thu
-         </span>
-       </a>
-     </li>
-   </ul>
- </aside>
+ 
  <!-- Sidebar menu-->
     <main class="app-content">
       <div class="app-title">
@@ -124,13 +19,25 @@
             <div class="tile-body">
               <div class="row element-button">
                 
-                <div class="col-sm-2">
+                <!-- <div class="col-sm-2">
                   <a class="btn btn-delete btn-sm pdf-file" type="button" title="In" onclick="myFunction(this)"><i
                       class="fas fa-file-pdf"></i> Xuất PDF</a>
                 </div>
                 <div class="col-sm-2">
                   <a class="btn btn-delete btn-sm" type="button" title="Xóa" onclick="myFunction(this)"><i
                       class="fas fa-trash-alt"></i> Xóa tất cả </a>
+                </div> -->
+                <div class="form-group col-md-3 ">
+                  <form action="../back-end/DoiTrangThaiDonHang.php">
+                    <input type="hidden" name="MaDHH" value="<?php echo $MaDDH ?>">
+                <label for="exampleSelect1" class="control-label">Trạng thái đơn hàng</label>
+                <select name="TinhTrang" required class="form-control"  id="exampleSelect1">
+                  <option value="1">Chờ xử lý</option>
+                  <option value="2">Đang Giao</option>
+                  <option value="3">Đã hoàn thành</option>
+                </select>
+                <input class="btn btn-save" style="margin-top: 5px;" type="submit" value="Lưu">
+                </form>
                 </div>
               </div>
               <table class="table table-hover table-bordered" id="sampleTable">
@@ -139,27 +46,61 @@
                     <th width="10"><input type="checkbox" id="all"></th>
                     <th>ID đơn hàng</th>
                     <th>Khách hàng</th>
-                    <th>Đơn hàng</th>
+                    <th>Tên SP<th>
+                    <th>Đơn giá</th>
                     <th>Số lượng</th>
                     <th>Tổng tiền</th>
                     <th>Ngày đặt</th>
-                    <th>Tình trạng</th>
-                    <th>Chức năng</th>
+                  
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
+                <?php
+                              $sql = "SELECT a.MaDDH, a.NgayDat, a.TongTien, b.HoTen, c.TenSP, c.SoLuong, c.DonGia
+                              FROM dondathang a, thanhvien b, chitietdondathang c
+                              WHERE a.MaDDH = $MaDDH AND a.MaDDH=c.MaDDH AND a.MaTV=b.MaThanhVien;";
+                              if ($connection != null) {
+                                try {
+                                  $statement = $connection->prepare($sql);
+                                  $statement->execute();
+                                  $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                                  $dondathangs = $statement->fetchAll();
+                                  foreach ($dondathangs as $dondathang) {
+                                    
+                                    $NgayDat = $dondathang['NgayDat'] ?? '';
+                                    $TongTien= $dondathang['TongTien'] ?? '';
+                                    $HoTen= $dondathang['HoTen'] ?? '';
+                                    $TenSP= $dondathang['TenSP'] ?? '';
+                                    $SoLuong= $dondathang['SoLuong'] ?? '';
+                                    $DonGia= $dondathang['DonGia'] ?? '';
+                                    $TongTien =0;
+                                    $TongTien = $SoLuong * $DonGia;
+                                    echo '<tr>
+                                    <td width="10"><input type="checkbox" name="check1" value="1"></td>
+                                    <td>'.$MaDDH.'</td>
+                                    <td>'.$HoTen.'</td>
+                                    <th>'.$TenSP.'<th>
+                                    <td>'.number_format($DonGia, 0, '', ',').'</td>
+                                    <td>'.$SoLuong.'</td>
+                                    <td>'.number_format($TongTien, 0, '', ',').'</td>
+                                    <td>'.$NgayDat.'</td>
+                                    </tr>';
+                                  
+                                  }
+                                } catch (PDOException $e) {
+                                  echo "Cannot query database";
+                                }
+                              }
+                              ?>
+                  <!-- <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
                     <td>MD0837</td>
                     <td>Nguyễn Trung Thành</td>
-                    <td>LAPTOP ACER ASPIRE A514-54-59QK</td>
-                    <td>2</td>
+                    <td>Nguyễn Trung Thành</td>
                     <td>9.400.000 đ</td>
                     <td>17/03/2023</td>
                     <td><span class="badge bg-success">Đã hoàn thành</span></td>
-                    <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
-                      <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
-                      data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
+                    <td></td>
                   </tr>
                   <tr>
                     <td width="10"><input type="checkbox" name="check1" value="1"></td>
@@ -186,7 +127,7 @@
                     <td class="del"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"><i class="fas fa-trash-alt"></i> </button>
                       <button class="btn btn-primary btn-sm edit" type="button" title="Sửa" id="show-emp" data-toggle="modal"
                       data-target="#ModalUP"><i class="fas fa-edit"></i></button></td>
-                  </tr>
+                  </tr> -->
                 </tbody>
               </table>
             </div>
