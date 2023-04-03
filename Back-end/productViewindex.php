@@ -39,9 +39,9 @@
                                                     $CauHinh = $sanpham['CauHinh'] ??'';
                                                     $HinhAnh = $sanpham['HinhAnh'] ??'';
                                                    echo '<div class="p-item">'; //1div
-                                                        echo '<img src="../HinhAnh/'.$HinhAnh.'" alt="">';
+                                                        echo '<a href="../Front-end/product.php?MaSP='.$MaSP.'"><img src="../HinhAnh/'.$HinhAnh.'" alt=""></a>';
                                                         echo '<h1 class="p-sku" style="font-size: 12px;"> Mã SP : '.$MaSP.' </h1>';
-                                                        echo '<a href="" class="p-name">'.$CauHinh.'</a>';
+                                                        echo '<a href="../Front-end/product.php?MaSP='.$MaSP.'" class="p-name">'.$CauHinh.'</a>';
                                                         echo '<div class="price-container">';
                                                                 echo '<del class="p-old-price"> '.number_format($DonGia, 0, '', ',').' đ </del>';
                                                                 echo '<span class="p-discount"> -20% </span>';
@@ -51,7 +51,7 @@
                                                 }
                                                 echo '</div>';
                                             echo '</div>';
-                                            echo '<a href="" class="view-all">XEM TẤT CẢ SẢN PHẨM</a>';
+                                            echo '<a href="../Front-end/viewallproduct.php?MaLoaiSP='.$MaLoaiSP.'" class="view-all">XEM TẤT CẢ SẢN PHẨM</a>';
                                         echo '</div>';
                                     echo '</section>';
                                             } else {

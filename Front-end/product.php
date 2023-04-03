@@ -1,114 +1,143 @@
-<?php 
-        require 'header.php';
+<?php
+require 'header.php';
+           
 ?>
-    <!----end-menu----------->
+<!----end-menu----------->
 
-    <!----content----------->
-    <section class="product">
-        <div class="containers">
-            <div class="product-top row">
-                <p><a href="index.html">Trang chủ</a></p><span>&#62;</span><p>Laptop, Máy Tính Xách Tay</p><span>&#62;</span><p>Laptop Acer</p>
-            </div>
-            <div class="product-content row">
-                <div class="product-content-left row">
-                    <div class="product-content-left-big-img">
-                        <img src="images/laptop1.png" alt="">
-                    </div>
-                    <div class="product-content-left-small-img">
-                        <img src="images/laptop1.png" alt="">
-                        <img src="images/img20.png" alt="">
-                        <img src="images/img25.png" alt="">
-                        <img src="images/img23.png" alt="">
-                    </div>
-                </div>
-                <div class="product-content-right">
-                    <div class="product-content-right-product-name">
-                        <h1>Laptop Acer Swift 3 SF314-43-R4X3 NX.AB1SV.004 (Ryzen 5-5500U | 16GB | 512GB | AMD Radeon | 14 inch FHD | Win 11 | Bạc)</h1>
-                        <p>Mã SP: NBAC0322</p>
-                    </div>
-                    <div class="product-content-right-product-item" style="padding-top: 10px;">
-                        <div class="product-content-right-product-item-title">
-                            Thông số sản phẩm
-                        </div>
-                        <ul class="product-content-right-product-item-ul">
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                CPU: Intel Core i3 1115G4
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                RAM: 4GB 
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                Ổ cứng: 128GB SSD
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                VGA: Onboard
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                Màn hình: 15.6 inch FHD
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                HĐH: Win 10
-                            </li>
-                            <li>
-                                <i class="fa fa-check-circle"></i>
-                                Màu: bạc
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="product-content-right-product-price">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td width="130px" class="font-600">
-                                        Giá niêm yết:
-                                    </td>
-                                    <td>
-                                        <del style="color: #888888;" class="font-600">
-                                            18.490.000 đ 
-                                        </del>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td width="130px" class="font-600">
-                                        Giá khuyến mại:
-                                    </td>
-                                    <td>
-                                       <b style="color: #ce0707;" class="text-18">15.990.000 đ</b>
-                                       <span style="color: #888888;" class="text-12">
-                                            [Giá đã có VAT]
-                                        </span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="quantity">
-                        <p style="font-weight: bold;">Số lượng:</p>
-                        <input type="number" min="0" value="1">
-                    </div>
-                    <div class="product-content-right-product-button">
-                        <button>
-                            <b class="d-block">ĐẶT MUA NGAY</b>
-                            <span class="d-block">Nhanh chóng, thuận tiện</span>
-                        </button>
-                        <button>
-                            <b class="d-block">CHO VÀO GIỎ</b>
-                            <span class="d-block">Mua tiếp sản phẩm khác</span>
-                        </button>
-                    </div>
-                    <div class="product-content-right-bottom">
+<!----content----------->
+<section class="product">
+    <div class="containers">
+   
+    <?php
+        $MaSP;
+        if (isset($_GET['MaSP'])) {
+            $MaSP = $_GET['MaSP'];
+        }
+        $LoaiSanPham;
 
-                    </div>
 
-                </div>
-            </div>
-            <div class="product-description">
+        $sql = 'select TenSP, DonGia, CauHinh, MaLoaiSP,HinhAnh FROM `sanpham` WHERE MaSP =' . $MaSP;
+
+        if ($connection != null) {
+            try {
+                $statement = $connection->prepare($sql);
+                $statement->execute();
+                $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
+                $sanphams = $statement->fetchAll();
+                if ($statement->rowCount() > 0) {
+                    // The statement has data djd
+                    foreach ($sanphams as $sanpham) {
+                        $TenSP = $sanpham['TenSP'] ?? '';
+                        $DonGia = $sanpham['DonGia'] ?? '';
+                        $CauHinh = $sanpham['CauHinh'] ?? '';
+                        $MaLoaiSP = $sanpham['MaLoaiSP'] ?? '';
+                        $CauHinh = $sanpham['CauHinh'] ?? '';
+                        $HinhAnh = $sanpham['HinhAnh'] ?? '';
+                        
+                        switch ($MaLoaiSP) {
+                            case 1:
+                                $LoaiSanPham = 'Điện Thoại';
+                                break;
+                            case 2:
+                                $LoaiSanPham = 'LapTop';
+                                break;
+                            case 3:
+                                $LoaiSanPham = 'Máy tính bảng';
+                                break;
+                            case 4:
+                                $LoaiSanPham = 'Phụ Kiện';
+                                break;
+                            default:
+                                $LoaiSanPham = '';
+                        }
+                        echo '<div class="product-top row">
+                                <p><a href="./index.php">Trang chủ</a></p><span>&#62;</span><p>'.$LoaiSanPham.'</p><span>&#62;</span><p>'.$TenSP.'</p>
+                            </div>
+                            <div class="product-content row">
+                                <div class="product-content-left row">
+                                    <div class="product-content-left-big-img">
+                                        <img src="../HinhAnh/'.$HinhAnh.'" alt="">
+                                    </div>
+                                   
+                                </div>
+                                <div class="product-content-right">
+                                    <div class="product-content-right-product-name">
+                                        <h1>'.$TenSP.'</h1>
+                                        <p>Mã SP: '.$MaSP.'</p>
+                                    </div>
+                                    <div class="product-content-right-product-item" style="padding-top: 10px;">
+                                        <div class="product-content-right-product-item-title">
+                                            Thông số sản phẩm
+                                        </div>
+                                        
+                                        <ul class="product-content-right-product-item-ul">
+                                            <li>
+                                                <i class="fa fa-check-circle"></i>
+                                                '.html_entity_decode($CauHinh).'
+                                            </li>
+                                            
+                                        </ul>
+                                    </div>
+                                    <div class="product-content-right-product-price">
+                                        <table>
+                                            <tbody>
+                                                <tr>
+                                                    <td width="130px" class="font-600">
+                                                        Giá niêm yết:
+                                                    </td>
+                                                    <td>
+                                                        <del style="color: #888888;" class="font-600">
+                                                            '.number_format($DonGia, 0, '', ',').' đ 
+                                                        </del>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td width="130px" class="font-600">
+                                                        Giá khuyến mại:
+                                                    </td>
+                                                    <td>
+                                                       <b style="color: #ce0707;" class="text-18">'.number_format($DonGia, 0, '', ',').' đ</b>
+                                                       <span style="color: #888888;" class="text-12">
+                                                            [Giá đã có VAT]
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="quantity">
+                                        <p style="font-weight: bold;">Số lượng:</p>
+                                        <input type="number" min="0" value="1">
+                                    </div>
+                                    <div class="product-content-right-product-button">
+                                        <button>
+                                            <b class="d-block">ĐẶT MUA NGAY</b>
+                                            <span class="d-block">Nhanh chóng, thuận tiện</span>
+                                        </button>
+                                        <button><a href = "./cart.php?MaSP='.$MaSP.'&TenSP='.$TenSP.'&DonGia='.$DonGia.'">
+                                            <b class="d-block">CHO VÀO GIỎ</b>
+                                            <span class="d-block">Mua tiếp sản phẩm khác</span>
+                                            </a>
+                                        </button>
+                                    </div>
+                                    <div class="product-content-right-bottom">
+                
+                                    </div>
+                
+                                </div>
+                            </div>';
+                    }
+                } else {
+                    // The statement doesn't have data
+                    echo "No data in query";
+                }
+            } catch (PDOException $e) {
+                echo "Cannot query database";
+            }
+        }
+        ?>
+
+        <!-- <div class="product-description">
                 <div class="product-description-item">
                     <h1 class="product-description-item-title">MÔ TẢ SẢN PHẨM</h1>
                     <p><em><strong>Lưu ý: Bài viết và hình ảnh chỉ có tính chất tham khảo vì cấu hình và đặc tính sản phẩm có thể thay đổi theo thị trường và từng phiên bản.</strong></em></p>
@@ -193,10 +222,11 @@
                         </span>
                     </p>
                 </div>
-            </div>
-        </div>
-    </section> 
-    <section class="product-related">
+            </div> -->
+    </div>
+    
+</section>
+<!-- <section class="product-related">
         <div class="product-related-title">
             <h1>SẢN PHẨM LIÊN QUAN</h1>
         </div>
@@ -243,9 +273,9 @@
             </div>
             
         </div>
-    </section>   
-    <!----content-end---------->
-    <?php 
-        include 'footer.php';
-    ?>
-    <!---------end--- footer-->
+    </section>    -->
+<!----content-end---------->
+<?php
+include 'footer.php';
+?>
+<!---------end--- footer-->

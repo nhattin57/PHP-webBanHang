@@ -4,7 +4,7 @@
     <!----end-menu----------->
     <!-----content----->    
     <section class="policy">
-        
+       
     </section>
     <!-----end--content----->
     <?php 

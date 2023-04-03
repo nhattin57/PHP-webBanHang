@@ -16,7 +16,7 @@
                         foreach($loaisanphams as $loaisanpham) {
                             $maLoaiSP = $loaisanpham['MaLoaiSP'] ??'';
                             $tenLoaiSP = $loaisanpham['TenLoai'] ??'';
-                            echo '<li><a href="">'.$tenLoaiSP.'</a>
+                            echo '<li><a href="../Front-end/viewallproduct.php?MaLoaiSP='.$maLoaiSP.'">'.$tenLoaiSP.'</a>
                             ';
                             
                             $sql = 'SELECT b.MaNSX, b.TenNSX FROM `sanpham` a, `nhasanxuat` b WHERE MaLoaiSP ='.$maLoaiSP.' and a.MaNSX = b.MaNSX GROUP BY MaNSX';
@@ -32,7 +32,7 @@
                                         //print_r($feedback2);
                                         $maNSX = $nhasanxuat['MaNSX'];
                                         $tenNSX= $nhasanxuat['TenNSX'];
-                                        echo '<li><i class="fa fa-laptop"></i><a href="">'.$tenNSX.'</a></li>';
+                                        echo '<li><a href="../Front-end/viewproductOnMenu.php?MaLoaiSP='.$maLoaiSP.'&MaNSX='.$maNSX.'">'.$tenNSX.'</a></li>';
                                     }
                                     echo '</ul>';
                                 }
@@ -54,7 +54,7 @@
                     }  
                 }
     ?>
-    <li><a href="">BẢO HÀNH</a></li>
-            <li><a href="">CHÍNH SÁCH - HƯỚNG DẪN</a></li>
+    <li><a href="">Bảo Hành</a></li>
+            <li><a href="">Chính Sách - Hướng Dẫn</a></li>
                    
      </div>
