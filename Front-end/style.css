@@ -969,16 +969,17 @@ s
   border: 1px solid #222;
   cursor: pointer;
   border-radius: 5px;
+  color: #000;
 }
 
 .product-content-right-product-button button:last-child:hover{
   background-color: #000;
- 
+   color: white;
 }
 
 .product-content-right-product-button button:last-child a:hover{
-  
-  color: white;
+  background-color: #000;
+   color: white;
 }
 
 .product-description

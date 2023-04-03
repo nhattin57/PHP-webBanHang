@@ -68,7 +68,7 @@
                                 <td>'.$DiaChi.' </td>
                                 <td>'.$SDT.'</td>
                                 <td>'.$Email.'</td>
-                                <td class="table-td-center del"><a onclick="confirm(`Bạn có chắc muốn xóa thành viên này không?`)" href="../back-end/xoaThanhVien.php?MaTV='.$MaThanhVien.'"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
+                                <td class="table-td-center del"><a onclick="return confirm(`Bạn có chắc muốn xóa thành viên này không?`);" href="../back-end/xoaThanhVien.php?MaTV='.$MaThanhVien.'"><button class="btn btn-primary btn-sm trash" type="button" title="Xóa"
                                     ><i class="fas fa-trash-alt"></i>
                                   </button></a>
                                   

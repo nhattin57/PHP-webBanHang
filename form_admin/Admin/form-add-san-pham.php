@@ -241,7 +241,7 @@ include './menu.php';
       <div class="modal-body">
         <div class="row">
           <div class="form-group  col-md-12">
-            <span class="thong-tin-thanh-toan">
+            <span class="thong-tin-loai-san-pham">
               <h5>Thêm mới loại sản phẩm</h5>
             </span>
           </div>

@@ -10,10 +10,10 @@ require 'header.php';
             $totalRecords;
             if($connection != null){
                 try{
-                    $statement = $connection ->prepare($sql);
-                    $statement->execute();
-                    $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
-                    $sanphams = $statement->fetchAll();
+                    $statement = $connection -> prepare($sql);
+                    $statement-> execute();
+                    $result = $statement-> setFetchMode(PDO::FETCH_ASSOC);
+                    $sanphams = $statement-> fetchAll();
                     $totalRecords = count($sanphams); // assuming $sanphams is an array of all products for the given category
                     }catch(PDOException $e){
                         echo "Cannot query database";
@@ -29,7 +29,7 @@ require 'header.php';
    
                   $TenLoaiSP;
 
-                    $sql = $sql = "SELECT MaSP, TenSP, DonGia, CauHinh, HinhAnh FROM `sanpham` WHERE MaLoaiSP = $MaLoaiSP AND DaXoa=0 ORDER BY NgayCapNhap DESC LIMIT $recordsPerPage OFFSET $offset";
+                    $sql = "SELECT MaSP, TenSP, DonGia, CauHinh, HinhAnh FROM `sanpham` WHERE MaLoaiSP = $MaLoaiSP AND DaXoa=0 ORDER BY NgayCapNhap DESC LIMIT $recordsPerPage OFFSET $offset";
                     switch ($MaLoaiSP) {
                         case 1:
                             $TenLoaiSP = 'Điện Thoại';
@@ -51,12 +51,12 @@ require 'header.php';
                                 echo '<div class="box-title-container">
                                             <h2 class="box-title">'.$TenLoaiSP.'</h2>
                                      </div>';
-                        echo '<div class="p-container" style="min-height: 700px">'; //1div //done
+                        echo '<div class="p-container" style="min-height: 350px">'; //1div //done
                             echo '<div class="d-flex flex-wrap">'; //1div //done
                             if($connection != null){
                                 try{
-                                    $statement = $connection ->prepare($sql);
-                                    $statement->execute();
+                                    $statement = $connection -> prepare($sql);
+                                    $statement -> execute();
                                     $result = $statement->setFetchMode(PDO::FETCH_ASSOC);
                                     $sanphams = $statement->fetchAll();
                                     $totalPages = ceil($totalRecords / $recordsPerPage);
@@ -83,16 +83,19 @@ require 'header.php';
                                         echo '</div>';
                                     echo '</div>';
                                    //paging here
-                                   echo '<div class="pagination">';
-                                    for ($i = 1; $i <= $totalPages; $i++) {
-                                        if ($i == $page) {
-                                            echo "<span class='current'>$i</span>";
-                                        } else {
-                                            echo "<a href='viewallProduct.php?MaLoaiSP=$MaLoaiSP&page=$i'>$i</a>";
-                                        }
-                                    }
+                                    echo'<div style="display: flex; justify-content: flex-end; margin-right:10px">';  
+                                        echo '<div class="pagination" style="margin-left:10px; margin-top:10px">';
+                                            for ($i = 1; $i <= $totalPages; $i++) {
+                                                if ($i == $page) {
+                                                    echo "<span class='current'>$i</span>";
+                                                } else {
+                                                    echo "<a href='viewallProduct.php?MaLoaiSP=$MaLoaiSP&page=$i' style='margin:5px'>$i</a>";
+                                                }
+                                            }
+                                        echo '</div>';
                                     echo '</div>';
                                 echo '</div>';
+                                
                             echo '</section>';
                         
                                     } else {
